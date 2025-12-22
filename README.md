@@ -1,16 +1,44 @@
-# React + Vite
+# Trend Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Trend Store, React ve Vite kullanılarak geliştirilmiş modern bir e-ticaret arayüzü başlangıç projesidir.  
+Bu proje, ürünleri listelemek, filtrelemek ve alışveriş yapmaya uygun bir UI/UX deneyimi sunmak için yapılandırılabilir.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Teknolojiler
 
-## React Compiler
+Proje aşağıdaki teknolojilerle geliştirilmiştir:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** – UI bileşenleri için
+- **Vite** – Hızlı geliştirme aracı
+- **JavaScript (ES6+)**
+- **HTML & CSS**
+- **npm** – Paket yönetimi
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Kurulum
+
+Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin:
+
+```bash
+# Repoyu klonla
+git clone https://github.com/ugur-uysal/trend-store.git
+
+# Proje klasörüne gir
+cd trend-store
+
+# Paketleri yükle
+npm install
+
+# Geliştirme sunucusunu çalıştır
+npm run dev
+```
+
+## UI ekran görüntüleri
+
+<p align="center">
+  <img src="./screenshots/homepage.png" width="30%" />
+  <img src="./screenshots/add-to-cart.png" width="30%" />
+  <img src="./screenshots/empty-cart.png" width="30%" />
+</p>
