@@ -1,43 +1,37 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Products.css";
 import ProductItem from "./ProductItem";
+import FormInputs from "../Form/FormInputs";
+import useHttp from "../../hooks/use-http";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const { isLoading, error, sendRequest: fetchProducts } = useHttp();
 
-  const fetchProductsHandler = useCallback(async function () {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(
-        "https://my-pos-application-api.onrender.com/api/products/get-all"
-      );
-      if (response.status !== 200) throw new Error("Something went wrong!");
+  const transformProducts = (productArr) => {
+    const newProducts = productArr.map((item) => {
+      return {
+        id: item._id,
+        name: item.title,
+        amount: 1,
+        ...item,
+      };
+    });
+    setProducts(newProducts);
+  };
 
-      const data = await response.json();
+  useEffect(() => {
+    fetchProducts(
+      {
+        url: "https://my-pos-application-api.onrender.com/api/products/get-all",
+      },
+      transformProducts
+    );
+  }, [fetchProducts]);
 
-      const newData = data.map((item) => {
-        return {
-          id: item._id,
-          name: item.title,
-          amount: 1,
-          ...item,
-        };
-      });
-      setProducts(newData);
-    } catch (error) {
-      setError(error.message);
-    }
-    setIsLoading(false);
-  }, []);
-
-  useEffect(() => fetchProductsHandler, [fetchProductsHandler]);
-
-  const productList = products.map((product) => (
-    <ProductItem product={product} key={product.id} />
-  ));
+  const productList = products
+    .map((product) => <ProductItem product={product} key={product.id} />)
+    .reverse();
 
   let content = <p>Found no products!</p>;
 
@@ -48,7 +42,19 @@ const Products = () => {
 
   if (isLoading) content = <p>Loading...</p>;
 
-  return <main className="products-wrapper">{content}</main>;
+  const productAddHandler = (newProduct) => {
+    setProducts((prevProducts) => [
+      ...prevProducts,
+      { name: newProduct.title, img: newProduct.image, ...newProduct },
+    ]);
+  };
+
+  return (
+    <main className="products-wrapper">
+      <FormInputs onAddProduct={productAddHandler} />
+      {content}
+    </main>
+  );
 };
 
 export default Products;
